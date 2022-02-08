@@ -1,0 +1,12 @@
+{
+  "name": "fsa-node-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
