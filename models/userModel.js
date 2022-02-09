@@ -1,0 +1,22 @@
+const mongoose = require('mongoose');
+
+const userModel = mongoose.model('user',{
+    firstName: String,
+    lastName: String,
+    gender: String,
+    password: String,
+    active: Boolean,
+    gender: Number,
+    email: String,
+    mobile: String,
+    qualification: Number, // UG: 1, PG:2, 10+2: 0
+    degree: Number,
+    image: String,
+    resume: String,
+    skills: [String],
+    passout: Number,
+    createdAt: Date,
+    updatedAt: Date
+});
+
+module.exports = userModel;
