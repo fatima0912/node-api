@@ -13,6 +13,7 @@ const userModel = mongoose.model('user', {
     },
     email: {
         type: String,
+        unique: true,
         required: [true, 'Email is required'],
         validate: {
             validator: v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v),
