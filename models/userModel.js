@@ -42,7 +42,7 @@ const userModel = mongoose.model('user', {
     skills: [String],
     passout: Number,
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: { type: Date, default: Date.now() }
 });
 
 module.exports = userModel;

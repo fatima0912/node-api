@@ -16,6 +16,7 @@ const handleErrors = (e, res) => {
 const register = async (req, res) => {
     try {
         const data = req.body;
+        data.createdAt = Date.now();
         await userRepository.add(data);
         res.status(201);
         res.send();
