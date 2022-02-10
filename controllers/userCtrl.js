@@ -8,10 +8,14 @@ const register = async (req, res) => {
         res.status(201);
         res.send();
     } catch (e) {
-        console.log(e);
-        // logging
-        res.status(500);
-        res.send('Internal Server Error');
+        if (e._message === 'user validation failed') {
+            res.status(400);
+            res.json(e.errors);
+        } else {
+            // logging
+            res.status(500);
+            res.send('Internal Server Error');
+        }
     }
 };
 
