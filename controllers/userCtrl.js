@@ -37,4 +37,15 @@ const update = async (req, res) => {
     }
 }
 
-module.exports = { register, update };
+const getUsers = async (req, res) => {
+    try {
+        const users = await userRepository.getUsers();
+
+        res.status(200);
+        res.json(users);
+    } catch (e) {
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+module.exports = { register, update, getUsers };
