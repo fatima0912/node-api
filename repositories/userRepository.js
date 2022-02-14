@@ -30,4 +30,13 @@ const getUsers = () => {
     return UserModel.find(filter, projection);
 }
 
-module.exports = { add, update, getUsers };
+const getUserByEmail = (email) => {
+    const filter = { email };
+    const projection = { __v: 0, _id: 0, password: 0 };
+    return UserModel.findOne(filter, projection);
+}
+
+module.exports = {
+    add, update,
+    getUsers, getUserByEmail
+};

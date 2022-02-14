@@ -48,4 +48,15 @@ const getUsers = async (req, res) => {
     }
 }
 
-module.exports = { register, update, getUsers };
+const getUserByEmail = (req, res) => {
+    userRepository.getUserByEmail(req.params.email)
+        .then(user => res.status(200).json(user))
+        .catch(err => res.status(500).send('Internal Server Error'));
+}
+
+module.exports = {
+    register,
+    update,
+    getUsers,
+    getUserByEmail
+};
