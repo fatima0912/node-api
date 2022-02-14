@@ -39,11 +39,23 @@ const update = async (req, res) => {
 
 const getUsers = async (req, res) => {
     try {
-        const users = await userRepository.getUsers();
+        const pageIndex = +req.params.page;
+        const pageSize = +req.params.size;
+        const totalRecords = await userRepository.getUserCount();
+        const totalPages = Math.ceil(totalRecords / pageSize);
+        const users = await userRepository.getUsers(pageIndex, pageSize);
 
+        const response = {
+            data: users,
+            metadata: {
+                totalRecords: totalRecords,
+                totalPages: totalPages
+            }
+        };
         res.status(200);
-        res.json(users);
+        res.json(response);
     } catch (e) {
+        console.log(e);
         res.status(500).send('Internal Server Error');
     }
 }
