@@ -39,11 +39,13 @@ const update = async (req, res) => {
 
 const getUsers = async (req, res) => {
     try {
-        const pageIndex = +req.params.page;
-        const pageSize = +req.params.size;
-        const totalRecords = await userRepository.getUserCount();
+        const pageIndex = +req.params.page || 0;
+        const pageSize = +req.params.size || 10;
+        const name = req.query.name || '';
+        const degree = req.query.degree;
+        const totalRecords = await userRepository.getUserCount(name, degree);
         const totalPages = Math.ceil(totalRecords / pageSize);
-        const users = await userRepository.getUsers(pageIndex, pageSize);
+        const users = await userRepository.getUsers(pageIndex, pageSize, name, degree);
 
         const response = {
             data: users,

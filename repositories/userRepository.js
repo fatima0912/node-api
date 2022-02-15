@@ -24,9 +24,15 @@ const update = (email, data) => {
     });
 };
 
-const getUsers = (pageIndex, pageSize) => {
+const getUsers = (pageIndex, pageSize, name, degree) => {
     const projection = { __v: 0, _id: 0, password: 0 };
-    const filter = {};
+    const filter = {
+        $or: [
+            { firstName: { $regex: name } },
+            { lastName: { $regex: name } },
+        ]
+    };
+    if (degree) filter.degree = degree;
     const skipRows = pageIndex * pageSize;
     return UserModel.find(filter, projection)
         .skip(skipRows)
@@ -39,8 +45,15 @@ const getUserByEmail = (email) => {
     return UserModel.findOne(filter, projection);
 }
 
-const getUserCount = () => {
-    return UserModel.count();
+const getUserCount = (name, degree) => {
+    const filter = {
+        $or: [
+            { firstName: { $regex: name } },
+            { lastName: { $regex: name } },
+        ]
+    };
+    if (degree) filter.degree = degree;
+    return UserModel.count(filter);
 }
 
 module.exports = {
