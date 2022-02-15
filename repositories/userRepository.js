@@ -37,6 +37,7 @@ const getUsers = (pageIndex, pageSize, options) => {
     if (qualification) filter.qualification = qualification;
     const skipRows = pageIndex * pageSize;
     return UserModel.find(filter, projection)
+        .sort({ updatedAt: -1 })
         .skip(skipRows)
         .limit(pageSize);
 }
