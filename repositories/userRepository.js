@@ -38,8 +38,6 @@ const getUsers = (pageIndex, pageSize, options) => {
     if (skills) {
         const skillsArr = skills.split(',');
         filter.skills = { $all: skillsArr };
-
-        console.log(filter, 'filter');
     }
     const skipRows = pageIndex * pageSize;
     return UserModel.find(filter, projection)

@@ -24,6 +24,7 @@ const userModel = mongoose.model('user', {
         type: String,
         required: [true, 'Password is required']
     },
+    role: { type: Number, default: 0 },
     gender: String,
     active: { type: Boolean, default: 1 },
     gender: Number,
