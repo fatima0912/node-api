@@ -29,8 +29,8 @@ const getUsers = (pageIndex, pageSize, options) => {
     const { name, qualification, degree, skills } = options;
     const filter = {
         $or: [
-            { firstName: { $regex: name } },
-            { lastName: { $regex: name } },
+            { firstName: { $regex: name, $options: 'i' } },
+            { lastName: { $regex: name, $options: 'i' } },
         ]
     };
     if (degree) filter.degree = degree;
@@ -58,8 +58,8 @@ const getUserCount = (options) => {
     const { name, qualification, degree, skills } = options;
     const filter = {
         $or: [
-            { firstName: { $regex: name } },
-            { lastName: { $regex: name } },
+            { firstName: { $regex: name, $options: 'i' } },
+            { lastName: { $regex: name, $options: 'i' } },
         ]
     };
     if (degree) filter.degree = degree;
