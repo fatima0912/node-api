@@ -26,7 +26,7 @@ const update = (email, data) => {
 
 const getUsers = (pageIndex, pageSize, options) => {
     const projection = { __v: 0, _id: 0, password: 0 };
-    const { name, qualification, degree } = options;
+    const { name, qualification, degree, skills } = options;
     const filter = {
         $or: [
             { firstName: { $regex: name } },
@@ -35,6 +35,12 @@ const getUsers = (pageIndex, pageSize, options) => {
     };
     if (degree) filter.degree = degree;
     if (qualification) filter.qualification = qualification;
+    if (skills) {
+        const skillsArr = skills.split(',');
+        filter.skills = { $all: skillsArr };
+
+        console.log(filter, 'filter');
+    }
     const skipRows = pageIndex * pageSize;
     return UserModel.find(filter, projection)
         .sort({ updatedAt: -1 })
@@ -49,7 +55,7 @@ const getUserByEmail = (email) => {
 }
 
 const getUserCount = (options) => {
-    const { name, qualification, degree } = options;
+    const { name, qualification, degree, skills } = options;
     const filter = {
         $or: [
             { firstName: { $regex: name } },
@@ -58,6 +64,10 @@ const getUserCount = (options) => {
     };
     if (degree) filter.degree = degree;
     if (qualification) filter.qualification = qualification;
+    if (skills) {
+        const skillsArr = skills.split(',');
+        filter.skills = { $all: skillsArr };
+    }
     return UserModel.count(filter);
 }
 

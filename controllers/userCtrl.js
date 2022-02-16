@@ -45,6 +45,7 @@ const getUsers = async (req, res) => {
             name: req.query.name || '',
             qualification: +req.query.qualification,
             degree: +req.query.degree,
+            skills: req.query.skills
         };
         const totalRecords = await userRepository.getUserCount(options);
         const totalPages = Math.ceil(totalRecords / pageSize);
