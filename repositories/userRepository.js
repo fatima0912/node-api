@@ -40,8 +40,11 @@ const getUsers = (pageIndex, pageSize, options) => {
         filter.skills = { $all: skillsArr };
     }
     const skipRows = pageIndex * pageSize;
+
+    const sort = options.sort ? { [options.sort]: options.sortDir || 1 } : { updatedAt: -1 };
+
     return UserModel.find(filter, projection)
-        .sort({ updatedAt: -1 })
+        .sort(sort)
         .skip(skipRows)
         .limit(pageSize);
 }
