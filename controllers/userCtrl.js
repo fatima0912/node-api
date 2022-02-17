@@ -1,4 +1,5 @@
 const userRepository = require('../repositories/userRepository');
+const cryptoUtils = require('../utils/cryptoUtils');
 
 const alreadyExists = (e) => e.message && e.message.indexOf('duplicate key') > -1
 
@@ -16,6 +17,7 @@ const handleErrors = (e, res) => {
 const register = async (req, res) => {
     try {
         const data = req.body;
+        data.password = await cryptoUtils.getHash(data.password);
         data.createdAt = Date.now();
         await userRepository.add(data);
         res.status(201);
@@ -74,9 +76,27 @@ const getUserByEmail = (req, res) => {
         .catch(err => res.status(500).send('Internal Server Error'));
 }
 
+const signin = async (req, res) => {
+    const payload = req.body;
+    const dbUser = await userRepository.getUserPassword(payload.email);
+    if (!dbUser) {
+        res.status(401).send("Unauthorized");
+        return;
+    }
+    const result = await cryptoUtils.compare(payload.password, dbUser.password);
+    if (result) {
+        res.status(200);
+        res.send("Login Success");
+    } else {
+        res.status(401);
+        res.send("Unauthorized");
+    }
+}
+
 module.exports = {
     register,
     update,
     getUsers,
-    getUserByEmail
+    getUserByEmail,
+    signin
 };

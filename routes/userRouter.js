@@ -3,6 +3,7 @@ const userCtrl = require('../controllers/userCtrl');
 const router = express.Router();
 
 router.post('/signup', userCtrl.register);
+router.post('/signin', userCtrl.signin);
 router.put('/:email', userCtrl.update);
 router.get('/page/:page/size/:size', userCtrl.getUsers);
 router.get('/', userCtrl.getUsers);
