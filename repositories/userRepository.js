@@ -72,8 +72,8 @@ const getUserCount = (options) => {
     return UserModel.count(filter);
 }
 
-const getUserPassword = (email) => {
-    return UserModel.findOne({ email }, { password: 1 });
+const getUser = (email) => {
+    return UserModel.findOne({ email }, { password: 1, email: 1, role: 1 });
 }
 
 module.exports = {
@@ -82,5 +82,5 @@ module.exports = {
     getUsers,
     getUserByEmail,
     getUserCount,
-    getUserPassword
+    getUser
 };

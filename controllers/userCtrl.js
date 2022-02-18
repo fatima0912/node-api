@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const userRepository = require('../repositories/userRepository');
 const cryptoUtils = require('../utils/cryptoUtils');
 
@@ -78,15 +79,15 @@ const getUserByEmail = (req, res) => {
 
 const signin = async (req, res) => {
     const payload = req.body;
-    const dbUser = await userRepository.getUserPassword(payload.email);
+    const dbUser = await userRepository.getUser(payload.email);
     if (!dbUser) {
         res.status(401).send("Unauthorized");
         return;
     }
     const result = await cryptoUtils.compare(payload.password, dbUser.password);
     if (result) {
-        res.status(200);
-        res.send("Login Success");
+        const token = cryptoUtils.getToken(dbUser);
+        res.status(200).send(token);
     } else {
         res.status(401);
         res.send("Unauthorized");
@@ -95,7 +96,7 @@ const signin = async (req, res) => {
 
 module.exports = {
     register,
-    update, 
+    update,
     getUsers,
     getUserByEmail,
     signin
