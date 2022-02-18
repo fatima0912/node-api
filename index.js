@@ -18,10 +18,5 @@ mongoose.connect(config.dbConStr)
     .then(res => console.log('Connected to MongoDb'))
     .catch(err => console.log('failed to connect to db'));
 
-
-
-// public routes
 app.use('/', deafultRouter);
-
-// private routes
 app.use('/api/users', userRouter);
