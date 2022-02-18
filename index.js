@@ -18,19 +18,10 @@ mongoose.connect(config.dbConStr)
     .then(res => console.log('Connected to MongoDb'))
     .catch(err => console.log('failed to connect to db'));
 
-//middelware
 
-function validate(req, res, next) {
-    // res.status(401);
-    // res.send('Unauthorized');
-
-    next();
-}
 
 // public routes
 app.use('/', deafultRouter);
-
-app.use(validate);
 
 // private routes
 app.use('/api/users', userRouter);

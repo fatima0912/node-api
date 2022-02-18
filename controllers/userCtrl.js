@@ -95,7 +95,7 @@ const signin = async (req, res) => {
 
 module.exports = {
     register,
-    update,
+    update, 
     getUsers,
     getUserByEmail,
     signin
