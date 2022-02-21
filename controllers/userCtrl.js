@@ -1,12 +1,14 @@
 const jwt = require('jsonwebtoken');
 const userRepository = require('../repositories/userRepository');
 const cryptoUtils = require('../utils/cryptoUtils');
+const logger = require('../utils/logger');
 
 const alreadyExists = (e) => e.message && e.message.indexOf('duplicate key') > -1
 
 const hasErrors = (e) => e._message === 'user validation failed'
 
 const handleErrors = (e, res) => {
+    logger.error({ message: 'Failed to create user', error: e });
     if (alreadyExists(e))
         res.status(409).send('User already exists');
     else if (hasErrors(e))

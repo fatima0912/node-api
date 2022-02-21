@@ -15,8 +15,9 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
+const dir = path.join(__dirname, 'logs');
+if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 
-fs.mkdirSync(path.join(__dirname, 'logs'));
 const stream =
     fs.createWriteStream(path.join(__dirname, 'logs', 'request.log'), { flags: 'a' });
 app.use(morgan('combined', { stream }));
