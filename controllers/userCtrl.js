@@ -94,10 +94,24 @@ const signin = async (req, res) => {
     }
 }
 
+const addRecruiter = async (req, res) => {
+    try {
+        const user = req.body;
+        user.password = await cryptoUtils.getHash(user.password);
+        user.createdAt = Date.now();
+        user.role = 1; // recruiter
+        await userRepository.add(user);
+        res.status(201).send();
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 module.exports = {
     register,
     update,
     getUsers,
     getUserByEmail,
-    signin
+    signin,
+    addRecruiter
 };
