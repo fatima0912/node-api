@@ -9,7 +9,7 @@ const get = (req, res) => {
 const health = async (req, res) => {
     try {
         await mongoose.connect(config.dbConStr);
-        res.status(201);
+        res.status(200);
         res.json({ db: 'Up' });
         mongoose.connection.close();
     } catch (e) {
