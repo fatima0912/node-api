@@ -88,7 +88,13 @@ const signin = async (req, res) => {
     const result = await cryptoUtils.compare(payload.password, dbUser.password);
     if (result) {
         const token = cryptoUtils.getToken(dbUser);
-        res.status(200).send(token);
+        const response = {
+            firstName: dbUser.firstName,
+            lastName: dbUser.lastName,
+            token,
+            email: dbUser.email
+        }
+        res.status(200).send(response);
     } else {
         res.status(401);
         res.send("Unauthorized");
