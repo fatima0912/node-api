@@ -13,7 +13,7 @@ const handleErrors = (e, res) => {
     else if (hasErrors(e))
         res.status(400).json(e.errors);
     else
-        res.status(500).send('Internal Server Error');
+        res.status(500).send(e);
 }
 
 const register = async (req, res) => {
