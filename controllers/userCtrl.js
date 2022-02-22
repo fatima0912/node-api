@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const userRepository = require('../repositories/userRepository');
 const cryptoUtils = require('../utils/cryptoUtils');
 const logger = require('../utils/logger');

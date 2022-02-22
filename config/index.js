@@ -1,5 +1,6 @@
 const config = {
-    dbConStr: 'mongodb://localhost:27017/api'
+    dbConStr: process.env.dbConStr,
+    jwtSecret: process.env.jwtSecret
 };
 
 module.exports = config;
