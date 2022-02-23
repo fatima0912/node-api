@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userModel = mongoose.model('user', {
+const schema = mongoose.Schema({
     firstName: {
         type: String,
         minLength: [3, 'Min. 3 characters'],
@@ -45,5 +45,10 @@ const userModel = mongoose.model('user', {
     createdAt: Date,
     updatedAt: { type: Date, default: Date.now() }
 });
+
+const userModel = mongoose.model('user',schema);
+
+schema.index({ firstName: 1 });
+schema.index({ lastName: 1 });
 
 module.exports = userModel;
