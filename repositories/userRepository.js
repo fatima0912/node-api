@@ -8,7 +8,7 @@ const add = (data) => {
 const update = (email, data) => {
     const { firstName, lastName, mobile,
         qualification, degree, passout,
-        skills, gender } = data;
+        skills, gender, resume } = data;
     return UserModel.updateOne({ email }, {
         $set: {
             firstName,
@@ -19,6 +19,7 @@ const update = (email, data) => {
             degree,
             skills,
             passout,
+            resume,
             updatedAt: Date.now()
         }
     });

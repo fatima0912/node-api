@@ -32,6 +32,7 @@ const register = async (req, res) => {
 const update = async (req, res) => {
     try {
         const email = req.params.email;
+        req.body.resume = req.resume; // multer
         await userRepository.update(email, req.body);
 
         res.status(204);
