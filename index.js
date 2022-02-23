@@ -25,6 +25,8 @@ app.use(morgan('combined', { stream }));
 
 app.use(bodyParser.json());
 
+app.use('/uploads', express.static('./uploads'));
+
 mongoose.connect(config.dbConStr)
     .then(res => console.log('Connected to MongoDb'))
     .catch(err => console.log(err, 'failed to connect to db'));

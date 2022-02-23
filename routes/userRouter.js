@@ -30,7 +30,7 @@ router.post('/signin', userCtrl.signin);
 router.put('/:email', upload.single('resume'), userCtrl.update);
 
 // recruiter
-router.get('/page/:page/size/:size', tokenAuth, authorize.authorizeRecruiter, userCtrl.getUsers);
+router.get('/page/:page/size/:size', userCtrl.getUsers);
 router.get('/', tokenAuth, authorize.authorizeRecruiter, userCtrl.getUsers);
 router.get('/:email', tokenAuth, authorize.authorizeRecruiter, userCtrl.getUserByEmail);
 

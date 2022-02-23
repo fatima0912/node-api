@@ -58,8 +58,16 @@ const getUsers = async (req, res) => {
         const totalPages = Math.ceil(totalRecords / pageSize);
         const users = await userRepository.getUsers(pageIndex, pageSize, options);
 
+        const mappedUsers = users.map(user => {
+            const jsonUser = user.toJSON();
+            return {
+                ...jsonUser,
+                resume: 'http://localhost:3000/uploads/' + user.resume
+            }
+        });
+
         const response = {
-            data: users,
+            data: mappedUsers,
             metadata: {
                 totalRecords: totalRecords,
                 totalPages: totalPages
