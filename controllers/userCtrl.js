@@ -62,7 +62,7 @@ const getUsers = async (req, res) => {
             const jsonUser = user.toJSON();
             return {
                 ...jsonUser,
-                resume: 'http://localhost:3000/uploads/' + user.resume
+                resume: `${req.protocol}://${req.get('host')}/uploads/${user.resume}`
             }
         });
 
