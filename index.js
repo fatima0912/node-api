@@ -9,10 +9,11 @@ const deafultRouter = require('./routes/defaultRouter');
 const userRouter = require('./routes/userRouter');
 
 const app = express();
-const port = 3000;
+// const port = 3000;
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
 });
 
 const dir = path.join(__dirname, 'logs');
