@@ -31,6 +31,9 @@ const getUsers = (pageIndex, pageSize, options) => {
         $or: [
             { firstName: { $regex: name, $options: 'i' } },
             { lastName: { $regex: name, $options: 'i' } },
+        ],
+        $eq: [
+            {role: 0}
         ]
     };
     if (degree) filter.degree = degree;

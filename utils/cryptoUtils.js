@@ -13,7 +13,7 @@ const getToken = (user) => {
     const { email, role } = user;
     return jwt.sign({ email, role },
         'secret@123$',
-        { expiresIn: '10m' });
+        { expiresIn: '20m' });
 
 }
 
