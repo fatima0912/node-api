@@ -9,9 +9,10 @@ const authorizeRecruiter = (req, res, next) => {
     else res.status(403).send('Forbidden');
 };
 
+
 const authorizeAdmin = (req, res, next) => {
     if (req.role === Role.Admin) next();
     else res.status(403).send('Forbidden');
 }
 
-module.exports = { authorizeAdmin, authorizeRecruiter };
+module.exports = { authorizeAdmin, authorizeRecruiter};
