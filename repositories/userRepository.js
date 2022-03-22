@@ -29,6 +29,7 @@ const getUsers = (pageIndex, pageSize, options) => {
     const projection = { __v: 0, _id: 0, password: 0 };
     const { name, qualification, degree, skills } = options;
     const filter = {
+        role: 0,
         $or: [
             { firstName: { $regex: name, $options: 'i' } },
             { lastName: { $regex: name, $options: 'i' } },
@@ -45,6 +46,7 @@ const getUsers = (pageIndex, pageSize, options) => {
     const sort = options.sort ? { [options.sort]: options.sortDir || 1 } : { updatedAt: -1 };
 
     return UserModel.find(filter, projection)
+        .collation({ locale: "en" })
         .sort(sort)
         .skip(skipRows)
         .limit(pageSize);
@@ -59,6 +61,7 @@ const getUserByEmail = (email) => {
 const getUserCount = (options) => {
     const { name, qualification, degree, skills } = options;
     const filter = {
+        role: 0,
         $or: [
             { firstName: { $regex: name, $options: 'i' } },
             { lastName: { $regex: name, $options: 'i' } },
